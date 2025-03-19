@@ -18,13 +18,22 @@ class RoomsFactory extends Factory
     public function definition(): array
     {
         return [
-            'room_number' =>fake()->unique()->numberBetween(1,500),
-            'type'=>fake()->randomElement(Rooms::$types),
-            'number_of_beds'=>fake()->numberBetween(1,5),
+            'name' => '',
+            'bed_type'=>fake()->randomElement(Rooms::$types),
+            'number_of_beds' =>fake()->numberBetween(1,2),
             'price'=> fake()->boolean(90)
             ?fake()->randomFloat(2,80,500)
             :fake()->randomFloat(2,500,5000),
-            'status'=>fake()->randomElement(Rooms::$status),
+            'status'=>fake()->boolean(75)
+            ?Rooms::$status[0] : Rooms::$status[1],
         ];
+    }
+
+    public function occupied(){
+        return $this->state(function (array $attributes){
+            return [
+                'status' => 'occupied',
+            ];
+        });
     }
 }

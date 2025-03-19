@@ -9,4 +9,6 @@ class Services extends Model
 {
     /** @use HasFactory<\Database\Factories\ServicesFactory> */
     use HasFactory;
+
+    public static $services = ['Wi-Fi','Transportation_Card','Spa','Butler','Concierge'];
 }

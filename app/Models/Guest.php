@@ -9,4 +9,8 @@ class Guest extends Model
 {
     /** @use HasFactory<\Database\Factories\GuestsFactory> */
     use HasFactory;
+
+    public static function getNumberofguests(){
+        return self::count();
+    }
 }
