@@ -32,7 +32,13 @@ class RoomsFactory extends Factory
             'name' => '',
             'bed_type'=>fake()->randomElement(Rooms::$types),
             'number_of_beds' =>fake()->numberBetween(1,2),
+<<<<<<< HEAD
             'price'=> $price,
+=======
+            'price'=> fake()->boolean(90)
+            ?fake()->randomFloat(2,80,500)
+            :fake()->randomFloat(2,500,5000),
+>>>>>>> 920039d4186de30014b64399d413ffe7da3c2419
             'status'=>fake()->boolean(75)
             ?Rooms::$status[0] : Rooms::$status[1],
         ];

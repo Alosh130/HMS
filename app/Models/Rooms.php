@@ -18,8 +18,11 @@ class Rooms extends Model
     public static $types = ['King', 'Queen','Twin','Full'];
     public static $totalRooms = 500;
 
+<<<<<<< HEAD
     public static $rooms = ['Standard Room','Deluxe Room','Suite','Presidential suite'];
 
+=======
+>>>>>>> 920039d4186de30014b64399d413ffe7da3c2419
     public static function getWeightedRandomRoomType(){
         $roomTypes = [
             'Standard Room' => 60, 
