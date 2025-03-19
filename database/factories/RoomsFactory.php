@@ -10,6 +10,7 @@ use App\Models\Rooms;
  */
 class RoomsFactory extends Factory
 {
+    private static $roomIndex = 0;
     /**
      * Define the model's default state.
      *
@@ -17,14 +18,31 @@ class RoomsFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'room_number' =>fake()->unique()->numberBetween(1,500),
-            'type'=>fake()->randomElement(Rooms::$types),
-            'number_of_beds'=>fake()->numberBetween(1,5),
-            'price'=> fake()->boolean(90)
-            ?fake()->randomFloat(2,80,500)
-            :fake()->randomFloat(2,500,5000),
-            'status'=>fake()->randomElement(Rooms::$status),
+        $roomPrice =[
+            'Standard Room' => 500, 
+            'Deluxe Room' => 800,   
+            'Suite' => 1200,     
+            'Presidential suite' => 1500,
         ];
+        $roomTypes = array_keys($roomPrice);
+        $roomType = $roomTypes[self::$roomIndex % count($roomTypes)];
+        self::$roomIndex++;
+        $price = $roomPrice[$roomType];
+        return [
+            'name' => '',
+            'bed_type'=>fake()->randomElement(Rooms::$types),
+            'number_of_beds' =>fake()->numberBetween(1,2),
+            'price'=> $price,
+            'status'=>fake()->boolean(75)
+            ?Rooms::$status[0] : Rooms::$status[1],
+        ];
+    }
+
+    public function occupied(){
+        return $this->state(function (array $attributes){
+            return [
+                'status' => 'occupied',
+            ];
+        });
     }
 }
